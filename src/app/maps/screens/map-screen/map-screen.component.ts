@@ -6,11 +6,12 @@ import { PlacesService } from '../../services/places.service';
   templateUrl: './map-screen.component.html',
   styleUrls: ['./map-screen.component.css']
 })
-export class MapScreenComponent implements OnInit {
+export class MapScreenComponent {
 
   constructor(private placeService: PlacesService) { }
 
-  ngOnInit(): void {
+  get isUserLocationReady(){
+    return this.placeService.isUserLocationReady;
   }
 
 }
