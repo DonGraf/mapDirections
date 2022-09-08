@@ -11,10 +11,10 @@ export interface Feature {
   placeType:   string[];
   relevance:   number;
   properties:  Properties;
-  textEs:      string;
+  text_es:      string;
   placeNameEs: string;
   text:        string;
-  placeName:   string;
+  place_name:   string;
   center:      number[];
   geometry:    Geometry;
   context:     Context[];
