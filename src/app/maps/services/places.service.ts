@@ -20,7 +20,7 @@ export class PlacesService {
       navigator.geolocation.getCurrentPosition(
         ({coords})=> 
         {
-          this.useLocation = [coords.latitude, coords.longitude];
+          this.useLocation = [coords.longitude, coords.latitude];
           resolve(this.useLocation);
         },    
         (err) => {
