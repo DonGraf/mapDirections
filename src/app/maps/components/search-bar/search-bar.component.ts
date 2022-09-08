@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchBarComponent implements OnInit {
 
+  private debounceTimer?: NodeJS.Timeout;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onQueryChanged(query: string){
+    //Se limpia el debounceTimer
+    if(this.debounceTimer) clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(()=>{
+      console.log(query);
+      
+    },500);
+
+  }
 }
