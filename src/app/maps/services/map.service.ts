@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LngLat, LngLatBounds, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
+import { AnySourceData, LngLat, LngLatBounds, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
 import { DirectionsApiClient } from '../api/directionsApiClient';
 import { Feature } from '../interfaces/places';
 import { DirectionsResponse, Route } from '../interfaces/directions';
@@ -80,6 +80,47 @@ export class MapService {
       this.map.fitBounds(bounds,{
       padding: 100
     })
+    //Generar la linea entre dos puntos
+    const sourceData: AnySourceData = {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'LineString',
+              coordinates: coords
+            }
+          }
+        ]
+      }
+    }
+    //TODO: Limpiar ruta previa
+    if(this.map.getLayer('RouteString')){
+      this.map.removeLayer('RouteString');
+      this.map.removeSource('RouteString');
+    }
+    
+    this.map.addSource('RouteString', sourceData);
+    this.map.addLayer({
+      id: 'RouteString',
+      type: 'line',
+      source: 'RouteString',
+      layout: {
+        'line-cap': 'round',
+        'line-join': 'round'
+      },
+      paint: {
+        'line-color': 'green',
+        'line-width': 3
+      }
+    });
+
   }
-  
+
+
+
+
 }
