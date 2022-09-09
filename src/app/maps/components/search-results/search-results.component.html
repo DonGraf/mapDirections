@@ -11,6 +11,7 @@
         <p>{{ place.place_name}}</p>
         <hr>
         <button class="btn btn-sm "
+        (click)="getDirections(place)"
         [ngClass]="(place.id === selectedId)? 'btn-outline-light':'btn-outline-primary'">Ir</button>
     </li>
 </ul>
